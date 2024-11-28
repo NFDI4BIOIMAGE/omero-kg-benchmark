@@ -1,0 +1,7 @@
+SELECT ?groupAttribute ?associatedAttribute (MAX(?targetAttribute) AS ?maxValue)
+WHERE {
+  ?subject <groupPredicate> ?groupAttribute ;
+  <targetPredicate> ?targetAttribute ;
+  <associatedPredicate> ?associatedAttribute .
+}
+GROUP BY ?groupAttribute ?associatedAttribute

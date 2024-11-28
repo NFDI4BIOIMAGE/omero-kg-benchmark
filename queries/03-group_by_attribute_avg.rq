@@ -1,0 +1,8 @@
+SELECT ?groupAttribute (AVG(?attribute1) AS ?avg1) (AVG(?attribute2) AS ?avg2)
+WHERE {
+  ?subject <groupPredicate> ?groupAttribute ;
+  <attributePredicate1> ?attribute1 ;
+  <attributePredicate2> ?attribute2 .
+}
+GROUP BY ?groupAttribute
+ORDER BY DESC(?avg1)

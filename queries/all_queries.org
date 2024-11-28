@@ -1,0 +1,6 @@
+#+transclude: [[file:01-list_of_attributes.rq]]
+01-list_of_attributes.rq
+02-group_by_attribute_sort.rq
+03-group_by_attribute_avg.rq
+04-regex.rq
+05-group_by_attribute_other_avg.rq

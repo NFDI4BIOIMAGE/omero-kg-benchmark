@@ -1,0 +1,8 @@
+SELECT ?groupAttribute (COUNT(?conditionA) AS ?countA) (COUNT(?conditionB) AS ?countB)
+WHERE {
+  ?subject <groupPredicate> ?groupAttribute ;
+  <conditionPredicate> ?condition .
+  BIND(IF(?condition = <valueA>, ?subject, UNDEF) AS ?conditionA)
+  BIND(IF(?condition = <valueB>, ?subject, UNDEF) AS ?conditionB)
+}
+GROUP BY ?groupAttribute

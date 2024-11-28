@@ -1,0 +1,4 @@
+SELECT DISTINCT ?attribute
+WHERE {
+  ?subject a ?attribute .
+}

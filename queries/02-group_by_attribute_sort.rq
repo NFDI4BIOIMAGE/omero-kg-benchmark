@@ -1,0 +1,8 @@
+SELECT ?groupAttribute (COUNT(?relatedAttribute) AS ?count)
+WHERE {
+  ?subject <groupPredicate> ?groupAttribute ;
+  <relatedPredicate> ?relatedAttribute .
+  FILTER (?relatedAttribute > <condition>)
+}
+GROUP BY ?groupAttribute
+ORDER BY DESC(?count)
