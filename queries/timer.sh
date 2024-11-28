@@ -1,13 +1,17 @@
 #! /bin/bash
 
+if test "$#" -neq 2 ]]; then
+    echo("Usage: timer.sh QUERYFILE ENDPOINTURL")
+fi
+
 QUERY=$1
+ENDPOINT=$2
 NQUERIES=10
 RESULTSFNAME=$(basename $QUERY .rq).timings.tsv
 
 # Environment
 TIME=/usr/bin/time
 SPARQL=/opt/apache-jena/bin/rsparql
-ENDPOINT=http://localhost:8080/sparql
 
 # Write header (overwrites previous results.)
 echo "Wall (s),User (s),Sys(s)" > $RESULTSFNAME
