@@ -16,7 +16,7 @@ TIME=/usr/bin/time
 SPARQL=/opt/apache-jena/bin/rsparql
 
 # Write header (overwrites previous results.)
-echo "Wall (s),User (s),Sys(s)" > $RESULTSFNAME
+echo "Wall (s),User (s),Sys (s)" > $RESULTSFNAME
 
 # Run timer NQUERIES times
 for (( i=1; i<=NQUERIES; i++ )); {

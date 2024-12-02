@@ -1,1 +1,1 @@
-select count(?s) count(?p) count(?o) where {?s ?p ?o}
+select (count(?s) as ?ns) where {?s ?p ?o}
