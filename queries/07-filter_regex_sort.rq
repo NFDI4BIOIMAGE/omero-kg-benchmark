@@ -1,0 +1,14 @@
+SELECT ?shortForm ?longForm ?frequency
+WHERE {
+  ?entry a <ClassOfInterest>;
+         <hasShortFormPredicate> ?shortForm;
+         <hasLongFormPredicate> ?longForm;
+         <hasFrequencyPredicate> ?frequency.
+  FILTER (
+          ?frequency > 10 &&            # Frequency condition
+          !regex(?shortForm, "^s", "i") && # Anything can go here, e.x: Short form does not start with "s"
+          regex(?longForm, "^specific", "i") # Same from line above: Long form starts with "specific"
+          )
+}
+ORDER BY DESC(?frequency)
+ 

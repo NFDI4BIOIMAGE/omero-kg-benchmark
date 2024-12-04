@@ -1,0 +1,7 @@
+SELECT ?entityName ?relatedAttribute1 ?relatedAttribute2
+WHERE {
+  ?entity <namePredicate> ?entityName ;
+  <attributePredicate1> ?relatedAttribute1 ;
+  <attributePredicate2> ?relatedAttribute2 .
+  FILTER(FTContains(?entityName, "searchTerm")) 
+}

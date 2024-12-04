@@ -1,0 +1,7 @@
+SELECT ?entityName ?attributeValue
+WHERE {
+  SERVICE <federatedEndpoint> {
+    ?entity <namePredicate> ?entityName ;
+    <attributePredicate> ?attributeValue .
+  }
+}
