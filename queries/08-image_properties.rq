@@ -1,0 +1,9 @@
+prefix ome_core: <http://www.openmicroscopy.org/rdf/2016-06/ome_core/>
+prefix ome_map: <http://openmicroscopy.org/omero/client/mapAnnotation#>
+prefix xsd:        <http://www.w3.org/2001/XMLSchema#>
+
+# Select all images and their properties. Not complex but demanding ;)
+SELECT * where {
+?img a ome_core:Image .
+?img ?img_prop ?img_prop_val .
+}
