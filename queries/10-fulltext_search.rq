@@ -1,7 +1,10 @@
-SELECT ?entityName ?relatedAttribute1 ?relatedAttribute2
+
+prefix ome_core: <http://www.openmicroscopy.org/rdf/2016-06/ome_core/>
+prefix ome_map: <http://openmicroscopy.org/omero/client/mapAnnotation#>
+prefix xsd:        <http://www.w3.org/2001/XMLSchema#>
+
+SELECT *
 WHERE {
-  ?entity <namePredicate> ?entityName ;
-  <attributePredicate1> ?relatedAttribute1 ;
-  <attributePredicate2> ?relatedAttribute2 .
-  FILTER(FTContains(?entityName, "searchTerm")) 
+  ?s ?p ?o .
+  FILTER(contains(?s, "r") || contains(?p, "r") || contains(?o, "r")) 
 }
