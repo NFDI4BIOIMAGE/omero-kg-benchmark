@@ -1,14 +1,18 @@
-SELECT ?shortForm ?longForm ?frequency
+prefix ome_core: <http://www.openmicroscopy.org/rdf/2016-06/ome_core/>
+prefix ome_map: <http://openmicroscopy.org/omero/client/mapAnnotation#>
+prefix xsd:        <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?strain ?position ?i
 WHERE {
-  ?entry a <ClassOfInterest>;
-         <hasShortFormPredicate> ?shortForm;
-         <hasLongFormPredicate> ?longForm;
-         <hasFrequencyPredicate> ?frequency.
+  ?entry a ome_core:Image;
+         ome_map:Strain ?strain;
+         ome_map:Position ?position;
+         ome_map:i ?i_str .
+  bind(xsd:integer(?i_str) as ?i)
   FILTER (
-          ?frequency > 10 &&            # Frequency condition
-          !regex(?shortForm, "^s", "i") && # Anything can go here, e.x: Short form does not start with "s"
-          regex(?longForm, "^specific", "i") # Same from line above: Long form starts with "specific"
+          ?i > 1 &&            # Frequency condition
+          !regex(?strain, "^H", "i") && # Anything can go here, e.x: Short form does not start with "s"
+          regex(?position, "^5", "i") # Same from line above: Long form starts with "specific"
           )
 }
-ORDER BY DESC(?frequency)
- 
+ORDER BY DESC(?position)
