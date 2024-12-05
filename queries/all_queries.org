@@ -5,3 +5,21 @@
 [[file:04-regex.rq]]
 [[file:05-group_by_attribute_other_avg.rq]]
 [[file:06-count_triples.rq]]
+
+#+begin_src sparql :url http://10.14.28.137:8080/sparql
+  select * where {?s ?p ?o} limit 10
+#+end_src
+
+#+RESULTS:
+| s                                                                           | p                                               | o                                                         |
+|-----------------------------------------------------------------------------+-------------------------------------------------+-----------------------------------------------------------|
+| http://www.openmicroscopy.org/rdf/2016-06/ome_core/ObjectiveMedium#air      | http://www.w3.org/1999/02/22-rdf-syntax-ns#type | http://www.openmicroscopy.org/rdf/2016-06/ome_core/Medium |
+| http://www.openmicroscopy.org/rdf/2016-06/ome_core/ObjectiveMedium#oil      | http://www.w3.org/1999/02/22-rdf-syntax-ns#type | http://www.openmicroscopy.org/rdf/2016-06/ome_core/Medium |
+| http://www.openmicroscopy.org/rdf/2016-06/ome_core/ObjectiveMedium#glycerol | http://www.w3.org/1999/02/22-rdf-syntax-ns#type | http://www.openmicroscopy.org/rdf/2016-06/ome_core/Medium |
+| http://www.openmicroscopy.org/rdf/2016-06/ome_core/ObjectiveMedium#water    | http://www.w3.org/1999/02/22-rdf-syntax-ns#type | http://www.openmicroscopy.org/rdf/2016-06/ome_core/Medium |
+| http://www.openmicroscopy.org/rdf/2016-06/ome_core/LaserMedium#TiSapphire   | http://www.w3.org/1999/02/22-rdf-syntax-ns#type | http://www.openmicroscopy.org/rdf/2016-06/ome_core/Medium |
+| http://www.openmicroscopy.org/rdf/2016-06/ome_core/LaserMedium#NdGlass      | http://www.w3.org/1999/02/22-rdf-syntax-ns#type | http://www.openmicroscopy.org/rdf/2016-06/ome_core/Medium |
+| http://www.openmicroscopy.org/rdf/2016-06/ome_core/LaserMedium#CO2          | http://www.w3.org/1999/02/22-rdf-syntax-ns#type | http://www.openmicroscopy.org/rdf/2016-06/ome_core/Medium |
+| http://www.openmicroscopy.org/rdf/2016-06/ome_core/LaserMedium#Alexandrite  | http://www.w3.org/1999/02/22-rdf-syntax-ns#type | http://www.openmicroscopy.org/rdf/2016-06/ome_core/Medium |
+| http://www.openmicroscopy.org/rdf/2016-06/ome_core/LaserMedium#HeNe         | http://www.w3.org/1999/02/22-rdf-syntax-ns#type | http://www.openmicroscopy.org/rdf/2016-06/ome_core/Medium |
+| http://www.openmicroscopy.org/rdf/2016-06/ome_core/LaserMedium#Cu           | http://www.w3.org/1999/02/22-rdf-syntax-ns#type | http://www.openmicroscopy.org/rdf/2016-06/ome_core/Medium |

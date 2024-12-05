@@ -1,0 +1,31 @@
+#+header: :url http://10.14.28.137:3030/OME/sparql
+#+begin_src sparql
+
+prefix ome_core: <http://www.openmicroscopy.org/rdf/2016-06/ome_core/>
+prefix ome_map: <http://openmicroscopy.org/omero/client/mapAnnotation#>
+prefix xsd:        <http://www.w3.org/2001/XMLSchema#>
+prefix wdp:        <http://www.wikidata.org/prop/direct/>
+
+SELECT ?img ?strain ?wd_sub ?wd_popsize
+WHERE {
+  ?img a ome_core:Image;
+       ome_map:Strain ?strain .
+  SERVICE <https://query.wikidata.org/sparql> {
+    ?wd_sub wdp:P395 ?strain;
+            wdp:P1082 ?wd_popsize .
+  }
+}
+limit 10
+#+end_src
+
+#+RESULTS:
+| HTTP/1.1 502 Bad Gateway                                                                                                                                                                                                                                                                                                     |                          |          |
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------+----------|
+| Date: Thu                                                                                                                                                                                                                                                                                                                    | 05 Dec 2024 16:29:28 GMT |          |
+| Fuseki-Request-Id: 8                                                                                                                                                                                                                                                                                                         |                          |          |
+| Content-Type: text/plain;charset=utf-8                                                                                                                                                                                                                                                                                       |                          |          |
+| Cache-Control: must-revalidate                                                                                                                                                                                                                                                                                               | no-cache                 | no-store |
+| Pragma: no-cache                                                                                                                                                                                                                                                                                                             |                          |          |
+| Content-Length: 317                                                                                                                                                                                                                                                                                                          |                          |          |
+|                                                                                                                                                                                                                                                                                                                              |                          |          |
+| Unexpected error making the query: GET https://query.wikidata.org/sparql?query=SELECT%20%20%2A%0AWHERE%0A%20%20%7B%20?wd_sub%20%20%3Chttp://www.wikidata.org/prop/direct/P395%3E%20%20%22D%22%20%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%3Chttp://www.wikidata.org/prop/direct/P1082%3E%20%20?wd_popsize%0A%20%20%7D%0A |                          |          |
