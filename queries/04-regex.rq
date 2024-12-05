@@ -1,7 +1,11 @@
-SELECT ?groupAttribute ?associatedAttribute (MAX(?targetAttribute) AS ?maxValue)
-WHERE {
-  ?subject <groupPredicate> ?groupAttribute ;
-  <targetPredicate> ?targetAttribute ;
-  <associatedPredicate> ?associatedAttribute .
-}
-GROUP BY ?groupAttribute ?associatedAttribute
+prefix ome_core: <http://www.openmicroscopy.org/rdf/2016-06/ome_core/>
+prefix ome_map: <http://openmicroscopy.org/omero/client/mapAnnotation#>
+  SELECT *
+  WHERE {
+    ?img a ome_core:Image;
+         ome_map:Strain ?strain;
+         ome_map:channel ?channel.
+
+         filter(regex(?strain, '^[^H][A-Z]+'))
+         filter(regex(?channel, '^[0-9]{2}-[G,R]FP'))
+  }
