@@ -1,8 +1,12 @@
-SELECT ?groupAttribute (COUNT(?conditionA) AS ?countA) (COUNT(?conditionB) AS ?countB)
-WHERE {
-  ?subject <groupPredicate> ?groupAttribute ;
-  <conditionPredicate> ?condition .
-  BIND(IF(?condition = <valueA>, ?subject, UNDEF) AS ?conditionA)
-  BIND(IF(?condition = <valueB>, ?subject, UNDEF) AS ?conditionB)
-}
-GROUP BY ?groupAttribute
+prefix ome_core: <http://www.openmicroscopy.org/rdf/2016-06/ome_core/>
+prefix ome_map: <http://openmicroscopy.org/omero/client/mapAnnotation#>
+prefix xsd:        <http://www.w3.org/2001/XMLSchema#>
+  SELECT ?name (COUNT(?conditionA) AS ?countA) (COUNT(?conditionB) AS ?countB)
+  WHERE {
+    ?subject a ome_core:Image; rdfs:label ?name ;
+    ome_map:Strain ?condition .
+    bind(iri("http://example.org/nil") as ?nan)
+    BIND(IF(regex(?condition,"^HH$"), ?subject, ?nan) AS ?conditionA)
+    BIND(IF(regex(?condition,"^HL$"), ?subject, ?nan) AS ?conditionB)
+  }
+  GROUP BY ?name
