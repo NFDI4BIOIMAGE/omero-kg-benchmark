@@ -13,4 +13,3 @@ WHERE {
 }
 GROUP BY ?strain
 ORDER BY DESC(?trap_num)
-limit 10
