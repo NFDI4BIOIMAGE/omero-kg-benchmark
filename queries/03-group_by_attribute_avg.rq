@@ -1,8 +1,16 @@
-SELECT ?groupAttribute (AVG(?attribute1) AS ?avg1) (AVG(?attribute2) AS ?avg2)
+prefix ome_core: <http://www.openmicroscopy.org/rdf/2016-06/ome_core/>
+prefix ome_map: <http://openmicroscopy.org/omero/client/mapAnnotation#>
+prefix xsd:        <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?strain (AVG(?trap_num) AS ?avg_trap) (AVG(?i_num) AS ?avg_i)
 WHERE {
-  ?subject <groupPredicate> ?groupAttribute ;
-  <attributePredicate1> ?attribute1 ;
-  <attributePredicate2> ?attribute2 .
+  ?img a ome_core:Image;
+        ome_map:Strain ?strain;
+        ome_map:trap ?trap ;
+        ome_map:i ?i .
+  bind(xsd:integer(?trap) as ?trap_num)
+  bind(xsd:integer(?i) as ?i_num)
 }
-GROUP BY ?groupAttribute
-ORDER BY DESC(?avg1)
+GROUP BY ?strain
+ORDER BY DESC(?trap_num)
+limit 10

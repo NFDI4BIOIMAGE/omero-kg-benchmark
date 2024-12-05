@@ -1,8 +1,16 @@
-SELECT ?groupAttribute (COUNT(?relatedAttribute) AS ?count)
+prefix ome_core: <http://www.openmicroscopy.org/rdf/2016-06/ome_core/>
+prefix ome_map: <http://openmicroscopy.org/omero/client/mapAnnotation#>
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix xsd:        <http://www.w3.org/2001/XMLSchema#>
+prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT distinct ?name (count(?oimg) as ?ndupnames)
 WHERE {
-  ?subject <groupPredicate> ?groupAttribute ;
-  <relatedPredicate> ?relatedAttribute .
-  FILTER (?relatedAttribute > <condition>)
+  ?img a ome_core:Image ;
+        rdfs:label ?name .
+  ?oimg rdfs:label ?name .
+  filter(?img != ?oimg)
 }
-GROUP BY ?groupAttribute
-ORDER BY DESC(?count)
+group by ?name
+order by desc(?ndupnames)
+limit 900
