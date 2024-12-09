@@ -26,8 +26,8 @@ rsparql --service http://10.14.28.137:8080/sparql --query 01-list_of_attributes.
 ```
 
 ## Timing
-The script *queries\/timer.sh* can be run to run a given query N times, measure wall clock, user, and system time
-and report the results statistics. Timings will be saved to disk.
+The script *queries\/timer.sh* runs a given query N times, measure wall clock, user, and system time
+and report the resulting statistics. Timings will be saved to disk.
 Usage (must be in the *queries\/* directory):
 ```
 ./timer.sh QUERY ENDPOINTURL ENDPOINTNAME NQUERIES
@@ -54,4 +54,6 @@ screen -dr ontop
 cd /home/ubuntu/repos/omero-ontop-mappings/hack24
 ./run-ontop.sh
 ```
+
+To leave the screen session press and hold the <kbd>Ctrl</kbd>, press and release <kbd>a</kbd> and press and release <kbd>d</kbd>. You can then logout from the server, the screen session will continue in the background.
 
