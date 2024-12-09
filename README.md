@@ -20,15 +20,15 @@ All endpoints run on the X.X.X.137 server.
 list download link, installation and usage instruction here.
 
 ## Queries
-/queries\// contains a number of SPARQL query files. They can be run against any of the endpoints listed above :
+/queries\// contains a number of SPARQL query files. They can be run on any of the endpoints listed above :
 ```
 rsparql --service http://10.14.28.137:8080/sparql --query 01-list_of_attributes.rq
 ```
 
 ## Timing
-The script /queries\/timer.sh/ can be run to run a given query N times, measure wall clock, user, and system time
+The script *queries\/timer.sh* can be run to run a given query N times, measure wall clock, user, and system time
 and report the results statistics. Timings will be saved to disk.
-Usage (must be in the /queries\// directory):
+Usage (must be in the *queries\/* directory):
 ```
 ./timer.sh QUERY ENDPOINTURL ENDPOINTNAME NQUERIES
 ```
@@ -38,12 +38,12 @@ Usage (must be in the /queries\// directory):
 cd queries
 ./timer.sh 01-list_of_attributes.rq http://10.14.28.137:8080/sparql ontop 100
 ```
-This would run the query /01-list_of_attributes.rq/ 
-on the ontop endpoint and write results to `01-list_of_attributes.ontop.timings.csv`.
+This would run the query *01-list_of_attributes.rq* 
+on the ontop endpoint and write results to *01-list_of_attributes.ontop.timings.csv*.
 
 
 ### Timing analysis
-The notebook /queries\/analyze_timings.ipynb/ loads all timing csv data, performs
+The notebook *queries\/analyze_timings.ipynb* loads all timing csv data, performs
 some descriptive statistics and renders a number of plots. Adjust to your liking. Required python packages: `pandas, seaborn, matplotlib`.
 
 ## Mappings
