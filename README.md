@@ -14,7 +14,7 @@ All endpoints run on the X.X.X.137 server.
 ## SPARQL client
 ### Apache-Jena 
 - Download:  https://dlcdn.apache.org/jena/binaries/apache-jena-5.2.0.tar.gz
-- Unpack into a directory and append */dir/to/apache-jena-5.2.0/bin/* to $PATH (on \*N\*X.) 
+- Unpack into a directory and append *\/dir\/to\/apache-jena-5.2.0\/bin\/* to $PATH (on \*N\*X.) 
 
 ### Other clients
 list download link, installation and usage instruction here.
