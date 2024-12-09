@@ -20,7 +20,7 @@ All endpoints run on the X.X.X.137 server.
 list download link, installation and usage instruction here.
 
 ## Queries
-/queries\// contains a number of SPARQL query files. They can be run on any of the endpoints listed above :
+*queries\/* contains a number of SPARQL query files. They can be run on any of the endpoints listed above :
 ```
 rsparql --service http://10.14.28.137:8080/sparql --query 01-list_of_attributes.rq
 ```
