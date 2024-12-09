@@ -26,7 +26,7 @@ rsparql --service http://10.14.28.137:8080/sparql --query 01-list_of_attributes.
 ```
 
 ## Timing
-The script \/queries\/timer.sh/ can be run to run a given query N times, measure wall clock, user, and system time
+The script /queries\/timer.sh/ can be run to run a given query N times, measure wall clock, user, and system time
 and report the results statistics. Timings will be saved to disk.
 Usage (must be in the /queries\// directory):
 ```
