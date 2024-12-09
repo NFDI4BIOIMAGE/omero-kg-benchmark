@@ -55,5 +55,5 @@ cd /home/ubuntu/repos/omero-ontop-mappings/hack24
 ./run-ontop.sh
 ```
 
-To leave the screen session press and hold the <kbd>Ctrl</kbd>, press and release <kbd>a</kbd> and press and release <kbd>d</kbd>. You can then logout from the server, the screen session will continue in the background.
+To leave the screen session press and hold <kbd>CTRL</kbd>, press and release <kbd>a</kbd>, press and release <kbd>d</kbd>, release <kbd>CTRL</kbd>. This brings you back into your login shell. You can then logout from the server, the screen session will continue in the background.
 
