@@ -85,7 +85,7 @@ for q in ??-*.rq; do ./timer.sh $query http://10.14.28.137:3030/OME/sparql ontop
 
 #### Results
 
-[!img](queries/saved_runs/20241210T091800/facet_walltime.png)
+![](queries/saved_runs/20241210T091800/facet_walltime.png)
 ### Run 2: Run all 10 queries one after the other first on fuseki, then on ontop. Repeat 30 times.
 
 #### Run parameters
