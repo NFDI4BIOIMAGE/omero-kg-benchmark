@@ -7,3 +7,6 @@
 - rsparql version reported as 4.2.0
 - connection: vpn to uni-muenster
 - note: all queries were run once about 30min before. Noting reduced query time on the 00-construct and other queries. Caching?
+
+## Results
+![](facet_walltime.png)
