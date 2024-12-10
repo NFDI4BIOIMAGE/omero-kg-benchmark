@@ -60,3 +60,24 @@ To leave the screen session press and hold <kbd>CTRL</kbd>, press and release <k
 ## Further reading
 https://medium.com/wallscope/comparing-linked-data-triplestores-ebfac8c3ad4f
 
+
+# Logbook
+## Dec. 10 2024
+- executing all queries in *[queries\/](queries/)* from remote via vpn on the X.X.X.137 Muenster server.
+- checked all queries can be executed.
+- query 09 failed, moved it to *queries\/query_foundry\/*.
+- observed that queries run after the test respond faster, suspects there is some caching going on.
+- results are saved in *queries\/saved_runs/20241210T091800*
+- run metadata in readme.md in than directory.
+- shell command for ontop:
+```
+cd queries
+for q in ??-*.rq; do ./timer.sh $query http://10.14.28.137:8080/sparql ontop 30
+```
+- shell command for fuseki
+```
+cd queries
+for q in ??-*.rq; do ./timer.sh $query http://10.14.28.137:3030/OME/sparql ontop 30
+```
+
+[!img](queries/saved_runs/20241210T091800/facet_walltime.png)
