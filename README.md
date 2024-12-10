@@ -181,5 +181,5 @@ done
 
 #### Results
 A bit difficult to compare to Run 2 above (different colors, different facet order). 
-But looking closely, the results from above comparing only ontop and fuseki more or less come out in the same way, again.Timings come out differently: for many queries, now fuseki is faster, ontop factor 2 slower.
+But looking closely, the results from above comparing only ontop and fuseki more or less come out in the same way, again.
 ![](queries/saved_runs/20241210T143500/facet_walltime.png)

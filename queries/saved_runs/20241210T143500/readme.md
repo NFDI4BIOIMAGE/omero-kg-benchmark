@@ -46,5 +46,4 @@ done
 
 
 ## Results
-Timings come out differently: for many queries, now fuseki is faster, ontop factor 2 slower.
 ![](facet_walltime.png)
