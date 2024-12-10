@@ -57,3 +57,6 @@ cd /home/ubuntu/repos/omero-ontop-mappings/hack24
 
 To leave the screen session press and hold <kbd>CTRL</kbd>, press and release <kbd>a</kbd>, press and release <kbd>d</kbd>, release <kbd>CTRL</kbd>. This brings you back into your login shell. You can then logout from the server, the screen session will continue in the background.
 
+## Further reading
+https://medium.com/wallscope/comparing-linked-data-triplestores-ebfac8c3ad4f
+
