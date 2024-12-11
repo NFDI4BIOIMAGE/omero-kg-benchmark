@@ -225,7 +225,7 @@ done
 ```
 
 #### Results
-![](queries/saved_runs/20241211T102000/fuseki_qrt_vs_ntriples.png)
+![](queries/saved_runs/20241211T102000/fuseki_clock_vs_ntriples_linear.png)
 ![](queries/saved_runs/20241211T102000/fuseki_qrt_vs_ntriples_log.png)
 
 The figure shows the measured query response time as function of the number of triples loaded in the Fuseki
