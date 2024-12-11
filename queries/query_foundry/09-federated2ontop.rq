@@ -1,0 +1,13 @@
+prefix ome_core: <http://www.openmicroscopy.org/rdf/2016-06/ome_core/>
+prefix ome_map: <http://openmicroscopy.org/omero/client/mapAnnotation#>
+prefix xsd:        <http://www.w3.org/2001/XMLSchema#>
+prefix wdp:        <http://www.wikidata.org/prop/direct/>
+
+SELECT ?img ?strain ?wd_sub 
+WHERE {
+  ?img a ome_core:Image;
+       ome_map:Strain ?strain .
+  SERVICE <http://localhost:8080/sparql> {
+    ?wd_sub ome_map:Strain ?strain.
+  }
+}
