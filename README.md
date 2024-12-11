@@ -5,11 +5,11 @@ Repository for project P4 "Endpoint Drafting and Testing" at the 2024 deNBI BioH
 ### Triplestores and SPARQL endpoints
 All endpoints run on the 128.176.233.7 server.
 
-| Name     | Query form                                   | Endpoint (http API)                 | Comments |
-|:---------|:---------------------------------------------|:------------------------------------|:---------|
-| Ontop    | http://128.176.233.7:8080                     | http://128.176.233.7:8080/sparql     |          |
-| Fuseki   | http://128.176.233.7:3030/#/dataset/OME/query | http://128.176.233.7:3030/OME/sparql |          |
-| Virtuoso | http://128.176.233.7:8890/sparql              | http://128.176.233.7:8890/sparql     |          |
+| Name     | Query form VPN IP                             | Endpoint (http API) VPN IP           | Query form public IP                          | Endpoint (http API) public IP        | Comments |
+|:---------|:----------------------------------------------|:-------------------------------------|:----------------------------------------------|:-------------------------------------|:---------|
+| Ontop    | http://10.14.28.137:8080                     | http://10.14.28.137:8080/sparql     | http://128.176.233.7:8080                     | http://128.176.233.7:8080/sparql     |          |
+| Fuseki   | http://10.14.28.137:3030/#/dataset/OME/query | http://10.14.28.137:3030/OME/sparql | http://128.176.233.7:3030/#/dataset/OME/query | http://128.176.233.7:3030/OME/sparql |          |
+| Virtuoso | http://10.14.28.137:8890/sparql              | http://10.14.28.137:8890/sparql     | http://128.176.233.7:8890/sparql              | http://128.176.233.7:8890/sparql     |          |
 
 ## SPARQL client
 ### Apache-Jena 
@@ -101,6 +101,7 @@ for q in ??-*.rq; do ./timer.sh $query http://128.176.233.7:3030/OME/sparql onto
 - data generating script: `run_all_queries.sh`
 
 #### Script
+The script was run while connected to the VPN. Adjust the IP if you take this as basis for your own runs.
 
 
 ```
@@ -117,11 +118,11 @@ for round in {1..30}; do
         echo "$query "
 
         echo ontop
-        ./timer.sh $query http://128.176.233.7:8080/sparql ontop 1
+        ./timer.sh $query http://10.14.28.137:8080/sparql ontop 1
         cat $(basename ${query} .rq).ontop.timings.csv | tail -1 >> $(basename ${query} .rq).ontop.timings.collected.csv
 
         echo fuseki
-        ./timer.sh $query http://128.176.233.7:3030/OME/sparql fuseki 1
+        ./timer.sh $query http://10.14.28.137:3030/OME/sparql fuseki 1
         cat $(basename ${query} .rq).fuseki.timings.csv | tail -1 >> $(basename ${query} .rq).fuseki.timings.collected.csv
     done
 done
@@ -163,15 +164,15 @@ for round in {1..30}; do
         echo "$query "
 
         echo ontop
-        ./timer.sh $query http://128.176.233.7:8080/sparql ontop 1
+        ./timer.sh $query http://10.14.28.137:8080/sparql ontop 1
         cat $(basename ${query} .rq).ontop.timings.csv | tail -1 >> $(basename ${query} .rq).ontop.timings.collected.csv
 
         echo fuseki
-        ./timer.sh $query http://128.176.233.7:3030/OME/sparql fuseki 1
+        ./timer.sh $query http://10.14.28.137:3030/OME/sparql fuseki 1
         cat $(basename ${query} .rq).fuseki.timings.csv | tail -1 >> $(basename ${query} .rq).fuseki.timings.collected.csv
 
         echo virtuoso
-        ./timer.sh $query http://128.176.233.7:8890/sparql virtuoso 1
+        ./timer.sh $query http://10.14.28.137:8890/sparql virtuoso 1
         cat $(basename ${query} .rq).virtuoso.timings.csv | tail -1 >> $(basename ${query} .rq).virtuoso.timings.collected.csv
 
     done
@@ -218,7 +219,7 @@ for round in {1..10}; do
         echo "$query "
 
         echo fuseki
-        ./timer.sh $query http://128.176.233.7:3030/OME/sparql fuseki 1
+        ./timer.sh $query http://10.14.28.137:3030/OME/sparql fuseki 1
         cat $(basename ${query} .rq).fuseki.timings.csv | tail -1 >> $(basename ${query} .rq).fuseki.timings.collected.csv
     done
 done
