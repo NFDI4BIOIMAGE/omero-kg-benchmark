@@ -183,3 +183,56 @@ done
 A bit difficult to compare to Run 2 above (different colors, different facet order). 
 But looking closely, the results from above comparing only ontop and fuseki more or less come out in the same way, again.
 ![](queries/saved_runs/20241210T143500/facet_walltime.png)
+
+## Dec. 11 2024
+### Run 4: Query response time vs. number of triples
+We first generated rdf.ttl files of reduced size with
+
+```sparql
+construct {?s ?p ?o} where {?s ?p ?o} limit <NTRIPLES>
+```
+`NTRIPLES` is a placeholder which takes on values of 1000, 2000, 5000, 10000, 20000, 50000, 100000, and 200000.
+
+Starting with the 200k triples graph loaded into the fuseki triplestore,
+we run 10 queries on the fuseki endpoint, repeat that sequence 10 times. Script is pasted below.
+
+After each run, we drop the default graph
+```sparql
+drop default
+```
+and upload the next reduced graph.
+
+#### Script
+
+```
+#! /bin/bash
+
+for query in ??-*.rq; do
+    echo "Wall (s),User (s),Sys (s)" > $(basename ${query} .rq).fuseki.timings.collected.csv
+done
+
+for round in {1..10}; do
+    echo "round=$round "
+    for query in ??-*.rq; do
+        echo "$query "
+
+        echo fuseki
+        ./timer.sh $query http://10.14.28.137:3030/OME/sparql fuseki 1
+        cat $(basename ${query} .rq).fuseki.timings.csv | tail -1 >> $(basename ${query} .rq).fuseki.timings.collected.csv
+    done
+done
+```
+
+#### Results
+![](fuseki_qrt_vs_ntriples.png)
+![](fuseki_qrt_vs_ntriples_log.png)
+The figure shows the measured query response time as function of the number of triples loaded in the Fuseki
+triplestore (left: linear x scale, right: log x scale). Each point is the average over 10 identical queries, the various queries are color coded. The shaded
+areas mark  1 standard deviation above and below the marker.
+
+#### Discussion
+The observed query response time vary with the number of triples and the type of the query. The longest query response time is measured for the "image properties" query, which retrieves all key-value annotations from all images. 
+For very small graphs (1000 and 2000 triples), all measured response times coincide at approx. 1s. Up to a certain graph size, each query's response time is at first independent of the graph size before it then starts to increase
+at approximately linear scale (query response time ~ number of triples).The 1s pedestal depends on external factors such as network bandwidth, and other processes running on the client system. 
+
+
