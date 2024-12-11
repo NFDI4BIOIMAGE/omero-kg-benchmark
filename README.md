@@ -182,6 +182,7 @@ done
 #### Results
 A bit difficult to compare to Run 2 above (different colors, different facet order). 
 But looking closely, the results from above comparing only ontop and fuseki more or less come out in the same way, again.
+
 ![](queries/saved_runs/20241210T143500/facet_walltime.png)
 
 ## Dec. 11 2024
@@ -224,8 +225,9 @@ done
 ```
 
 #### Results
-![](queries/saved_runs/20241211T02000/fuseki_qrt_vs_ntriples.png)
-![](queries/saved_runs/20241211T02000/fuseki_qrt_vs_ntriples_log.png)
+![](queries/saved_runs/20241211T102000/fuseki_qrt_vs_ntriples.png)
+![](queries/saved_runs/20241211T102000/fuseki_qrt_vs_ntriples_log.png)
+
 The figure shows the measured query response time as function of the number of triples loaded in the Fuseki
 triplestore (left: linear x scale, right: log x scale). Each point is the average over 10 identical queries, the various queries are color coded. The shaded
 areas mark  1 standard deviation above and below the marker.
