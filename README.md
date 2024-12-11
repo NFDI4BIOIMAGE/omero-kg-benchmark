@@ -228,9 +228,10 @@ done
 ![](queries/saved_runs/20241211T102000/fuseki_clock_vs_ntriples_linear.png)
 ![](queries/saved_runs/20241211T102000/fuseki_clock_vs_ntriples_log.png)
 
-The figure shows the measured query response time (Wall , User , and System clocks)
+The figure shows the measured query response time (Wall , User , and System clocks [^1])
 as function of the number of triples loaded in the Fuseki
-triplestore (left: linear x scale, right: log x scale). Each point is the average over 10 identical queries, the various queries are color coded. The shaded
+triplestore (top: linear x axis scale, right: log x axis scale). 
+Each point is the average over 10 identical queries, the various queries are color coded. The shaded
 areas mark  1 standard deviation above and below the marker.
 
 #### Discussion
@@ -241,3 +242,4 @@ starts to increase
 at approximately linear scale (query response wall time ~ number of triples).
 
 
+[^1] Wall time = time elapsed on a "wall" clock; User time = Sum of times that any CPU spends in user code within the process; System time: Sum of times that any CPU spends in system code within the process. See [this SO post for details](https://stackoverflow.com/questions/556405/what-do-real-user-and-sys-mean-in-the-output-of-time1).
