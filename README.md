@@ -7,9 +7,9 @@ All endpoints run on the 128.176.233.7 server.
 
 | Name     | Query form                                   | Endpoint (http API)                 | Comments |
 |:---------|:---------------------------------------------|:------------------------------------|:---------|
-| Ontop    | http://128.176.233.7:8080                     | http://10.14.28.137:8080/sparql     |          |
-| Fuseki   | http://128.176.233.7:3030/#/dataset/OME/query | http://10.14.28.137:3030/OME/sparql |          |
-| Virtuoso | http://128.176.233.7:8890/sparql              | http://10.14.28.137:8890/sparql     |          |
+| Ontop    | http://128.176.233.7:8080                     | http://128.176.233.7:8080/sparql     |          |
+| Fuseki   | http://128.176.233.7:3030/#/dataset/OME/query | http://128.176.233.7:3030/OME/sparql |          |
+| Virtuoso | http://128.176.233.7:8890/sparql              | http://128.176.233.7:8890/sparql     |          |
 
 ## SPARQL client
 ### Apache-Jena 
