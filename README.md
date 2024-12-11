@@ -224,8 +224,8 @@ done
 ```
 
 #### Results
-![](fuseki_qrt_vs_ntriples.png)
-![](fuseki_qrt_vs_ntriples_log.png)
+![](queries/saved_runs/20241211T02000/fuseki_qrt_vs_ntriples.png)
+![](queries/saved_runs/20241211T02000/fuseki_qrt_vs_ntriples_log.png)
 The figure shows the measured query response time as function of the number of triples loaded in the Fuseki
 triplestore (left: linear x scale, right: log x scale). Each point is the average over 10 identical queries, the various queries are color coded. The shaded
 areas mark  1 standard deviation above and below the marker.
