@@ -3,13 +3,13 @@ Repository for project P4 "Endpoint Drafting and Testing" at the 2024 deNBI BioH
 
 ## Benchmark environment
 ### Triplestores and SPARQL endpoints
-All endpoints run on the X.X.X.137 server.
+All endpoints run on the 128.176.233.7 server.
 
 | Name     | Query form                                   | Endpoint (http API)                 | Comments |
 |:---------|:---------------------------------------------|:------------------------------------|:---------|
-| Ontop    | http://10.14.28.137:8080                     | http://10.14.28.137:8080/sparql     |          |
-| Fuseki   | http://10.14.28.137:3030/#/dataset/OME/query | http://10.14.28.137:3030/OME/sparql |          |
-| Virtuoso | http://10.14.28.137:8890/sparql              | http://10.14.28.137:8890/sparql     |          |
+| Ontop    | http://128.176.233.7:8080                     | http://10.14.28.137:8080/sparql     |          |
+| Fuseki   | http://128.176.233.7:3030/#/dataset/OME/query | http://10.14.28.137:3030/OME/sparql |          |
+| Virtuoso | http://128.176.233.7:8890/sparql              | http://10.14.28.137:8890/sparql     |          |
 
 ## SPARQL client
 ### Apache-Jena 
@@ -22,7 +22,7 @@ list download link, installation and usage instruction here.
 ## Queries
 *queries\/* contains a number of SPARQL query files. They can be run on any of the endpoints listed above :
 ```
-rsparql --service http://10.14.28.137:8080/sparql --query 01-list_of_attributes.rq
+rsparql --service http://128.176.233.7:8080/sparql --query 01-list_of_attributes.rq
 ```
 
 ## Timing
@@ -36,7 +36,7 @@ Usage (must be in the *queries\/* directory):
 ##### Example
 ```
 cd queries
-./timer.sh 01-list_of_attributes.rq http://10.14.28.137:8080/sparql ontop 100
+./timer.sh 01-list_of_attributes.rq http://128.176.233.7:8080/sparql ontop 100
 ```
 This would run the query *01-list_of_attributes.rq* 
 on the ontop endpoint and write results to *01-list_of_attributes.ontop.timings.csv*.
@@ -75,12 +75,12 @@ https://medium.com/wallscope/comparing-linked-data-triplestores-ebfac8c3ad4f
 shell command for ontop:
 ```
 cd queries
-for q in ??-*.rq; do ./timer.sh $query http://10.14.28.137:8080/sparql ontop 30
+for q in ??-*.rq; do ./timer.sh $query http://128.176.233.7:8080/sparql ontop 30
 ```
 shell command for fuseki
 ```
 cd queries
-for q in ??-*.rq; do ./timer.sh $query http://10.14.28.137:3030/OME/sparql ontop 30
+for q in ??-*.rq; do ./timer.sh $query http://128.176.233.7:3030/OME/sparql ontop 30
 ```
 
 #### Results
@@ -117,11 +117,11 @@ for round in {1..30}; do
         echo "$query "
 
         echo ontop
-        ./timer.sh $query http://10.14.28.137:8080/sparql ontop 1
+        ./timer.sh $query http://128.176.233.7:8080/sparql ontop 1
         cat $(basename ${query} .rq).ontop.timings.csv | tail -1 >> $(basename ${query} .rq).ontop.timings.collected.csv
 
         echo fuseki
-        ./timer.sh $query http://10.14.28.137:3030/OME/sparql fuseki 1
+        ./timer.sh $query http://128.176.233.7:3030/OME/sparql fuseki 1
         cat $(basename ${query} .rq).fuseki.timings.csv | tail -1 >> $(basename ${query} .rq).fuseki.timings.collected.csv
     done
 done
@@ -133,7 +133,7 @@ Timings come out differently: for many queries, now fuseki is faster, ontop fact
 ![](queries/saved_runs/20241210T113800/facet_walltime.png)
 
 ### Run 3: Same logic as Run 2 but including virtuoso
-In the meantime, the virtuoso server has come online: http://10.14.28.137:8890/sparql
+In the meantime, the virtuoso server has come online: http://128.176.233.7:8890/sparql
 
 
 #### Run parameters
@@ -163,15 +163,15 @@ for round in {1..30}; do
         echo "$query "
 
         echo ontop
-        ./timer.sh $query http://10.14.28.137:8080/sparql ontop 1
+        ./timer.sh $query http://128.176.233.7:8080/sparql ontop 1
         cat $(basename ${query} .rq).ontop.timings.csv | tail -1 >> $(basename ${query} .rq).ontop.timings.collected.csv
 
         echo fuseki
-        ./timer.sh $query http://10.14.28.137:3030/OME/sparql fuseki 1
+        ./timer.sh $query http://128.176.233.7:3030/OME/sparql fuseki 1
         cat $(basename ${query} .rq).fuseki.timings.csv | tail -1 >> $(basename ${query} .rq).fuseki.timings.collected.csv
 
         echo virtuoso
-        ./timer.sh $query http://10.14.28.137:8890/sparql virtuoso 1
+        ./timer.sh $query http://128.176.233.7:8890/sparql virtuoso 1
         cat $(basename ${query} .rq).virtuoso.timings.csv | tail -1 >> $(basename ${query} .rq).virtuoso.timings.collected.csv
 
     done
@@ -217,7 +217,7 @@ for round in {1..10}; do
         echo "$query "
 
         echo fuseki
-        ./timer.sh $query http://10.14.28.137:3030/OME/sparql fuseki 1
+        ./timer.sh $query http://128.176.233.7:3030/OME/sparql fuseki 1
         cat $(basename ${query} .rq).fuseki.timings.csv | tail -1 >> $(basename ${query} .rq).fuseki.timings.collected.csv
     done
 done
