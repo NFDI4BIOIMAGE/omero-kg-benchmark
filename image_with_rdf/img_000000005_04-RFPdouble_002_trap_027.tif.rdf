@@ -1,0 +1,45 @@
+PREFIX fn:             <http://www.w3.org/2005/xpath-functions#>
+PREFIX ome_core:       <http://www.openmicroscopy.org/rdf/2016-06/ome_core/>
+PREFIX ome_site:       <https://example.org/site/>
+PREFIX ome_site_image: <https://example.org/site/Image/>
+PREFIX owl:            <http://www.w3.org/2002/07/owl#>
+PREFIX rdf:            <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdf4j:          <http://rdf4j.org/schema/rdf4j#>
+PREFIX rdfs:           <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX sesame:         <http://www.openrdf.org/schema/sesame#>
+PREFIX xsd:            <http://www.w3.org/2001/XMLSchema#>
+
+ome_site_image:499  rdf:type  ome_core:Image;
+        rdfs:label  "img_000000005_04-RFPdouble_002_trap_027.tif";
+        <http://openmicroscopy.org/omero/client/mapAnnotation#Assay>
+                "A0" , "A1" , "A3" , "A8";
+        <http://openmicroscopy.org/omero/client/mapAnnotation#Channel>
+                "04-RFPdouble";
+        <http://openmicroscopy.org/omero/client/mapAnnotation#Genotype>
+                "I0" , "I3" , "R2" , "X3";
+        <http://openmicroscopy.org/omero/client/mapAnnotation#Imagetype>
+                "derived" , "raw";
+        <http://openmicroscopy.org/omero/client/mapAnnotation#Investigation>
+                "I1" , "I2" , "I3";
+        <http://openmicroscopy.org/omero/client/mapAnnotation#Organism>
+                "Oppidum hanseaticum";
+        <http://openmicroscopy.org/omero/client/mapAnnotation#Position>
+                "5";
+        <http://openmicroscopy.org/omero/client/mapAnnotation#Strain>
+                "RDG" , "K" , "HRO" , "HH" , "D" , "CPH";
+        <http://openmicroscopy.org/omero/client/mapAnnotation#Study>
+                "S1" , "S0";
+        <http://openmicroscopy.org/omero/client/mapAnnotation#Term_Accession>
+                "NCBI_0000";
+        <http://openmicroscopy.org/omero/client/mapAnnotation#Term_Source>
+                "NCBI_Taxon";
+        <http://openmicroscopy.org/omero/client/mapAnnotation#channel>
+                "04-RFPdouble";
+        <http://openmicroscopy.org/omero/client/mapAnnotation#i>
+                "2";
+        <http://openmicroscopy.org/omero/client/mapAnnotation#token1>
+                "5";
+        <http://openmicroscopy.org/omero/client/mapAnnotation#trap>
+                "27";
+        <http://purl.org/dc/elements/1.1/identifier>
+                "499" .
