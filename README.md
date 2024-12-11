@@ -242,4 +242,4 @@ starts to increase
 at approximately linear scale (query response wall time ~ number of triples).
 
 
-[^1] Wall time = time elapsed on a "wall" clock; User time = Sum of times that any CPU spends in user code within the process; System time: Sum of times that any CPU spends in system code within the process. See [this SO post for details](https://stackoverflow.com/questions/556405/what-do-real-user-and-sys-mean-in-the-output-of-time1).
+[^1]: Wall time = time elapsed on a "wall" clock; User time = Sum of times that any CPU spends in user code within the process; System time: Sum of times that any CPU spends in system code within the process. See [this SO post for details](https://stackoverflow.com/questions/556405/what-do-real-user-and-sys-mean-in-the-output-of-time1).
