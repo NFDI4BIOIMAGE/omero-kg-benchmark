@@ -226,15 +226,18 @@ done
 
 #### Results
 ![](queries/saved_runs/20241211T102000/fuseki_clock_vs_ntriples_linear.png)
-![](queries/saved_runs/20241211T102000/fuseki_qrt_vs_ntriples_log.png)
+![](queries/saved_runs/20241211T102000/fuseki_clock_vs_ntriples_log.png)
 
-The figure shows the measured query response time as function of the number of triples loaded in the Fuseki
+The figure shows the measured query response time (Wall , User , and System clocks)
+as function of the number of triples loaded in the Fuseki
 triplestore (left: linear x scale, right: log x scale). Each point is the average over 10 identical queries, the various queries are color coded. The shaded
 areas mark  1 standard deviation above and below the marker.
 
 #### Discussion
-The observed query response time vary with the number of triples and the type of the query. The longest query response time is measured for the "image properties" query, which retrieves all key-value annotations from all images. 
-For very small graphs (1000 and 2000 triples), all measured response times coincide at approx. 1s. Up to a certain graph size, each query's response time is at first independent of the graph size before it then starts to increase
-at approximately linear scale (query response time ~ number of triples).The 1s pedestal depends on external factors such as network bandwidth, and other processes running on the client system. 
+The observed query response time vary with the number of triples and the type of the query. The longest query response time (wall time) is measured for the "image properties" query, which retrieves all key-value annotations from all images. 
+For very small graphs (1000 and 2000 triples), all measured response (wall) times coincide at approx. 1s.
+Up to a certain graph size, each query's response time is at first independent of the graph size before it 
+starts to increase
+at approximately linear scale (query response wall time ~ number of triples).
 
 
