@@ -16,13 +16,78 @@
 :PROPERTIES:
 :ID:       ea102cdd-2c30-4892-91db-67a39d9e906d
 :END:
-#+transclude: [[file:queries/saved_runs/20241210T091800/readme.org]]
+**** Testing all queries from remote via vpn
+:PROPERTIES:
+:ID:       1749151c-81d9-4d5d-9e3c-d2dd8b21d95d
+:END:
+- Servers: ontop, fuseki
+- number of query repeats: 30
+- client ip: 128.176.254.12
+- client hostname: micropop046
+- client software: apache-jena-5.2.0/bin/rsparql
+- rsparql version reported as 4.2.0
+- connection: vpn to uni-muenster
+- note: all queries were run once about 30min before. Noting reduced
+  query time on the 00-construct and other queries. Caching?
 
-*** Run 2: Run all 10 queries one after the other first on fuseki, then
+**** Workflow
+:PROPERTIES:
+:ID:       dcc3a8d5-8c2a-49af-8a58-ac1ef814e72a
+:END:
+- executing all queries
+- Connected to Münster VPN
+- Server host: 10.14.28.137
+- checked all queries can be executed.
+- query 09 failed, moved it to [[queries/query_foundry]].
+- observed that queries run after the test respond faster, suspect
+  there is some caching going on.
+- results are saved in [[file:/queries/saved_runs/20241210T091800]]
+
+***** Shell commands
+:PROPERTIES:
+:ID:       ae012b94-04af-4027-82db-8161fc46d53d
+:END:
+shell command for ontop:
+
+#+begin_example shell
+  cd queries
+  for q in ??-*.rq; do ./timer.sh $query http://128.176.233.7:8080/sparql ontop 30
+#+end_example
+
+shell command for fuseki
+
+#+begin_example shell
+  cd queries
+  for q in ??-*.rq; do ./timer.sh $query http://128.176.233.7:3030/OME/sparql ontop 30
+#+end_example
+
+***** Results
+:PROPERTIES:
+:ID:       79eb7d26-fc85-4802-936a-b9a9bccf2f62
+:END:
+[[file:queries/saved_runs/20241210T091800/facet_walltime.png]]
+
+**** Results
+:PROPERTIES:
+:ID:       c47a9c50-fb59-4098-ba69-80d7ed6a1518
+:END:
+[[file:queries/saved_runs/20241210T091800/facet_walltime.png]]
+
+**** Discussion
+:PROPERTIES:
+:ID:       9fe63540-6427-44bc-8e10-07d53b0e0805
+:END:
+In all queries, ontop's query response time is faster than fuseki. Must be aware of caching, hence should try other query submission strategy (-> see Run 2, Run 3)
+
+*** Run 2: Loop over 10 queries, 2 servers, 10 rounds in that order
+:PROPERTIES:
+:ID:       825c8799-bb59-4b89-aa22-1b4b2d1279c8
+:END:
+By changing the order with respect to Run1, we try to eliminate the effect of caching, as each server never sees the same two queries immediately one after the other, wherea
+before, all 30 queries were run one after the other.
 :PROPERTIES:
 :ID:       83d34711-801f-4a7e-a407-772b00ca12b0
 :END:
-on ontop. Repeat 30 times.
     :PROPERTIES:
     :CUSTOM_ID: run-2-run-all-10-queries-one-after-the-other-first-on-fuseki-then-on-ontop.-repeat-30-times.
     :END:
@@ -88,8 +153,6 @@ ontop factor 2 slower.
     :CUSTOM_ID: run-3-same-logic-as-run-2-but-including-virtuoso
     :ID:       a379367b-c468-4534-b8af-438c943d2083
     :END:
-In the meantime, the virtuoso server has come online:
-http://128.176.233.7:8890/sparql
 
 **** Run parameters
      :PROPERTIES:
@@ -145,9 +208,6 @@ done
      :CUSTOM_ID: results-2
      :ID:       f0741ea0-22c7-4901-9bcc-8f801ce2e2cf
      :END:
-A bit difficult to compare to Run 2 above (different colors, different
-facet order). But looking closely, the results from above comparing only
-ontop and fuseki more or less come out in the same way, again.
 
 [[file:queries/saved_runs/20241210T143500/facet_walltime.png]]
 
@@ -214,6 +274,7 @@ done
 [[file:queries/saved_runs/20241211T102000/fuseki_clock_vs_ntriples_linear.png]]
 [[file:queries/saved_runs/20241211T102000/fuseki_clock_vs_ntriples_log.png]]
 
+
 The figure shows the measured query response time (Wall , User , and
 System clocks [fn:1]) as function of the number of triples loaded in the
 Fuseki triplestore (top: linear x axis scale, right: log x axis scale).
@@ -240,5 +301,4 @@ triples).
        times that any CPU spends in user code within the process; System
        time: Sum of times that any CPU spends in system code within the
        process. See
-       [[https://stackoverflow.com/questions/556405/what-do-real-user-and-sys-mean-in-the-output-of-time1][this
-       SO post for details]].
+       [[https://stackoverflow.com/questions/556405/what-do-real-user-and-sys-mean-in-the-output-of-time1][this SO post for details]].
