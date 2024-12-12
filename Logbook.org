@@ -38,7 +38,7 @@
   there is some caching going on.
 - results are saved in [[file:/queries/saved_runs/20241210T091800]]
 
-**** Shell commands
+*** Shell commands
 :PROPERTIES:
 :ID:       ae012b94-04af-4027-82db-8161fc46d53d
 :END:
@@ -56,15 +56,9 @@ shell command for fuseki
   for q in ??-*.rq; do ./timer.sh $query http://128.176.233.7:3030/OME/sparql ontop 30
 #+end_example
 
-**** Results
-:PROPERTIES:
-:ID:       79eb7d26-fc85-4802-936a-b9a9bccf2f62
-:END:
-[[file:queries/saved_runs/20241210T091800/facet_walltime.png]]
-
 *** Results
 :PROPERTIES:
-:ID:       c47a9c50-fb59-4098-ba69-80d7ed6a1518
+:ID:       79eb7d26-fc85-4802-936a-b9a9bccf2f62
 :END:
 [[file:queries/saved_runs/20241210T091800/facet_walltime.png]]
 
