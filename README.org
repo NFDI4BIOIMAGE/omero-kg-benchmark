@@ -119,3 +119,8 @@ continue in the background.
    :END:
 https://medium.com/wallscope/comparing-linked-data-triplestores-ebfac8c3ad4f
 
+* Logbook
+:PROPERTIES:
+:ID:       930e96a3-14a1-4188-af7d-54e9b1ac0068
+:END:
+A log of all benchmark runs executed during the [[https://www.denbi.de/de-nbi-events/1678-biohackathon-germany-3][2024 de.NBI BioHackathon]] is in the [[file:Logbook.org][logbook document]].

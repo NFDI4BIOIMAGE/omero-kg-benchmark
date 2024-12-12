@@ -2,21 +2,16 @@
 #+author: @CFGrote:github.com
 #+date: 20241212
 
-* Logbook
-  :PROPERTIES:
-  :CUSTOM_ID: logbook
-  :ID:       3a360474-4383-46c6-a2f9-07e69726fee9
-  :END:
-** Dec. 10 2024
+* Dec. 10 2024
    :PROPERTIES:
    :CUSTOM_ID: dec.-10-2024
    :ID:       af2db540-6116-4fb3-9f02-33368cb8456a
    :END:
-*** Run 1
+** Run 1
 :PROPERTIES:
 :ID:       ea102cdd-2c30-4892-91db-67a39d9e906d
 :END:
-**** Testing all queries from remote via vpn
+*** Testing all queries from remote via vpn
 :PROPERTIES:
 :ID:       1749151c-81d9-4d5d-9e3c-d2dd8b21d95d
 :END:
@@ -30,7 +25,7 @@
 - note: all queries were run once about 30min before. Noting reduced
   query time on the 00-construct and other queries. Caching?
 
-**** Workflow
+*** Workflow
 :PROPERTIES:
 :ID:       dcc3a8d5-8c2a-49af-8a58-ac1ef814e72a
 :END:
@@ -43,7 +38,7 @@
   there is some caching going on.
 - results are saved in [[file:/queries/saved_runs/20241210T091800]]
 
-***** Shell commands
+**** Shell commands
 :PROPERTIES:
 :ID:       ae012b94-04af-4027-82db-8161fc46d53d
 :END:
@@ -61,25 +56,25 @@ shell command for fuseki
   for q in ??-*.rq; do ./timer.sh $query http://128.176.233.7:3030/OME/sparql ontop 30
 #+end_example
 
-***** Results
+**** Results
 :PROPERTIES:
 :ID:       79eb7d26-fc85-4802-936a-b9a9bccf2f62
 :END:
 [[file:queries/saved_runs/20241210T091800/facet_walltime.png]]
 
-**** Results
+*** Results
 :PROPERTIES:
 :ID:       c47a9c50-fb59-4098-ba69-80d7ed6a1518
 :END:
 [[file:queries/saved_runs/20241210T091800/facet_walltime.png]]
 
-**** Discussion
+*** Discussion
 :PROPERTIES:
 :ID:       9fe63540-6427-44bc-8e10-07d53b0e0805
 :END:
 In all queries, ontop's query response time is faster than fuseki. Must be aware of caching, hence should try other query submission strategy (-> see Run 2, Run 3)
 
-*** Run 2: Loop over 10 queries, 2 servers, 10 rounds in that order
+** Run 2: Loop over 10 queries, 2 servers, 10 rounds in that order
 :PROPERTIES:
 :ID:       825c8799-bb59-4b89-aa22-1b4b2d1279c8
 :END:
@@ -91,7 +86,7 @@ before, all 30 queries were run one after the other.
     :PROPERTIES:
     :CUSTOM_ID: run-2-run-all-10-queries-one-after-the-other-first-on-fuseki-then-on-ontop.-repeat-30-times.
     :END:
-**** Run parameters
+*** Run parameters
      :PROPERTIES:
      :CUSTOM_ID: run-parameters
      :ID:       f542bd95-cbc1-4eee-9c36-fbddeaf7787e
@@ -107,7 +102,7 @@ before, all 30 queries were run one after the other.
   see script below.
 - data generating script: =run_all_queries.sh=
 
-**** Script
+*** Script
      :PROPERTIES:
      :CUSTOM_ID: script
      :ID:       15971162-b06e-4025-a33b-6ac3ac6c8b88
@@ -139,7 +134,7 @@ for round in {1..30}; do
 done
 #+end_example
 
-**** Results
+*** Results
      :PROPERTIES:
      :CUSTOM_ID: results-1
      :ID:       e49db261-4cf9-4b44-823c-6045b3984f17
@@ -148,13 +143,13 @@ Timings come out differently: for many queries, now fuseki is faster,
 ontop factor 2 slower.
 [[file:queries/saved_runs/20241210T113800/facet_walltime.png]]
 
-*** Run 3: Same logic as Run 2 but including virtuoso
+** Run 3: Same logic as Run 2 but including virtuoso
     :PROPERTIES:
     :CUSTOM_ID: run-3-same-logic-as-run-2-but-including-virtuoso
     :ID:       a379367b-c468-4534-b8af-438c943d2083
     :END:
 
-**** Run parameters
+*** Run parameters
      :PROPERTIES:
      :CUSTOM_ID: run-parameters-1
      :ID:       a878ed7b-0235-426b-9a49-0d9fd3faca66
@@ -168,7 +163,7 @@ ontop factor 2 slower.
 - connection: vpn to uni-muenster
 - data generating script: =run_all_queries.sh=
 
-**** Script
+*** Script
      :PROPERTIES:
      :CUSTOM_ID: script-1
      :ID:       734b5163-6b25-461f-8d47-235731c3cac3
@@ -203,7 +198,7 @@ for round in {1..30}; do
 done
 #+end_example
 
-**** Results
+*** Results
      :PROPERTIES:
      :CUSTOM_ID: results-2
      :ID:       f0741ea0-22c7-4901-9bcc-8f801ce2e2cf
@@ -211,12 +206,12 @@ done
 
 [[file:queries/saved_runs/20241210T143500/facet_walltime.png]]
 
-** Dec. 11 2024
+* Dec. 11 2024
    :PROPERTIES:
    :CUSTOM_ID: dec.-11-2024
    :ID:       ce48bd6d-677c-49e5-9312-0b3ba1e07f4f
    :END:
-*** Run 4: Query response time vs. number of triples
+** Run 4: Query response time vs. number of triples
     :PROPERTIES:
     :CUSTOM_ID: run-4-query-response-time-vs.-number-of-triples
     :ID:       d69335f4-8277-4845-b675-43050b8f1ad3
@@ -242,7 +237,7 @@ drop default
 
 and upload the next reduced graph.
 
-**** Script
+*** Script
      :PROPERTIES:
      :CUSTOM_ID: script-2
      :ID:       3ac95051-05a6-4ef5-87d3-753f6991a49c
@@ -266,7 +261,7 @@ for round in {1..10}; do
 done
 #+end_example
 
-**** Results
+*** Results
      :PROPERTIES:
      :CUSTOM_ID: results-3
      :ID:       669b128d-6b61-47cf-8ea1-ef02c3b5f95d
@@ -282,7 +277,7 @@ Each point is the average over 10 identical queries, the various queries
 are color coded. The shaded areas mark 1 standard deviation above and
 below the marker.
 
-**** Discussion
+*** Discussion
      :PROPERTIES:
      :CUSTOM_ID: discussion
      :ID:       eaf91db0-c71b-4d7e-be99-8a0f5d5e7197
