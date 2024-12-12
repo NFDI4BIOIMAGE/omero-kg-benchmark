@@ -1,0 +1,244 @@
+#+title: Logbook
+#+author: @CFGrote:github.com
+#+date: 20241212
+
+* Logbook
+  :PROPERTIES:
+  :CUSTOM_ID: logbook
+  :ID:       3a360474-4383-46c6-a2f9-07e69726fee9
+  :END:
+** Dec. 10 2024
+   :PROPERTIES:
+   :CUSTOM_ID: dec.-10-2024
+   :ID:       af2db540-6116-4fb3-9f02-33368cb8456a
+   :END:
+*** Run 1
+:PROPERTIES:
+:ID:       ea102cdd-2c30-4892-91db-67a39d9e906d
+:END:
+#+transclude: [[file:queries/saved_runs/20241210T091800/readme.org]]
+
+*** Run 2: Run all 10 queries one after the other first on fuseki, then
+:PROPERTIES:
+:ID:       83d34711-801f-4a7e-a407-772b00ca12b0
+:END:
+on ontop. Repeat 30 times.
+    :PROPERTIES:
+    :CUSTOM_ID: run-2-run-all-10-queries-one-after-the-other-first-on-fuseki-then-on-ontop.-repeat-30-times.
+    :END:
+**** Run parameters
+     :PROPERTIES:
+     :CUSTOM_ID: run-parameters
+     :ID:       f542bd95-cbc1-4eee-9c36-fbddeaf7787e
+     :END:
+- Servers: ontop, fuseki
+- number of query repeats: 30
+- client ip: 128.176.254.12
+- client hostname: micropop046
+- client software: apache-jena-5.2.0/bin/rsparql
+- rsparql version reported as 4.2.0
+- connection: vpn to uni-muenster
+- note: changing order of looping over endpoints, rounds, and queries,
+  see script below.
+- data generating script: =run_all_queries.sh=
+
+**** Script
+     :PROPERTIES:
+     :CUSTOM_ID: script
+     :ID:       15971162-b06e-4025-a33b-6ac3ac6c8b88
+     :END:
+The script was run while connected to the VPN. Adjust the IP if you take
+this as basis for your own runs.
+
+#+begin_example shell
+#! /bin/bash
+
+for query in ??-*.rq; do
+    echo "Wall (s),User (s),Sys (s)" > $(basename ${query} .rq).ontop.timings.collected.csv
+    echo "Wall (s),User (s),Sys (s)" > $(basename ${query} .rq).fuseki.timings.collected.csv
+done
+
+for round in {1..30}; do
+    echo "round=$round "
+    for query in ??-*.rq; do
+        echo "$query "
+
+        echo ontop
+        ./timer.sh $query http://10.14.28.137:8080/sparql ontop 1
+        cat $(basename ${query} .rq).ontop.timings.csv | tail -1 >> $(basename ${query} .rq).ontop.timings.collected.csv
+
+        echo fuseki
+        ./timer.sh $query http://10.14.28.137:3030/OME/sparql fuseki 1
+        cat $(basename ${query} .rq).fuseki.timings.csv | tail -1 >> $(basename ${query} .rq).fuseki.timings.collected.csv
+    done
+done
+#+end_example
+
+**** Results
+     :PROPERTIES:
+     :CUSTOM_ID: results-1
+     :ID:       e49db261-4cf9-4b44-823c-6045b3984f17
+     :END:
+Timings come out differently: for many queries, now fuseki is faster,
+ontop factor 2 slower.
+[[file:queries/saved_runs/20241210T113800/facet_walltime.png]]
+
+*** Run 3: Same logic as Run 2 but including virtuoso
+    :PROPERTIES:
+    :CUSTOM_ID: run-3-same-logic-as-run-2-but-including-virtuoso
+    :ID:       a379367b-c468-4534-b8af-438c943d2083
+    :END:
+In the meantime, the virtuoso server has come online:
+http://128.176.233.7:8890/sparql
+
+**** Run parameters
+     :PROPERTIES:
+     :CUSTOM_ID: run-parameters-1
+     :ID:       a878ed7b-0235-426b-9a49-0d9fd3faca66
+     :END:
+- Servers: ontop, fuseki, virtuoso
+- number of query repeats: 30
+- client ip: 128.176.254.12
+- client hostname: micropop046
+- client software: apache-jena-5.2.0/bin/rsparql
+- rsparql version reported as 4.2.0
+- connection: vpn to uni-muenster
+- data generating script: =run_all_queries.sh=
+
+**** Script
+     :PROPERTIES:
+     :CUSTOM_ID: script-1
+     :ID:       734b5163-6b25-461f-8d47-235731c3cac3
+     :END:
+#+begin_example
+#! /bin/bash
+
+for query in ??-*.rq; do
+    echo "Wall (s),User (s),Sys (s)" > $(basename ${query} .rq).ontop.timings.collected.csv
+    echo "Wall (s),User (s),Sys (s)" > $(basename ${query} .rq).fuseki.timings.collected.csv
+    echo "Wall (s),User (s),Sys (s)" > $(basename ${query} .rq).virtuoso.timings.collected.csv
+done
+
+for round in {1..30}; do
+    echo "round=$round "
+    for query in ??-*.rq; do
+        echo "$query "
+
+        echo ontop
+        ./timer.sh $query http://10.14.28.137:8080/sparql ontop 1
+        cat $(basename ${query} .rq).ontop.timings.csv | tail -1 >> $(basename ${query} .rq).ontop.timings.collected.csv
+
+        echo fuseki
+        ./timer.sh $query http://10.14.28.137:3030/OME/sparql fuseki 1
+        cat $(basename ${query} .rq).fuseki.timings.csv | tail -1 >> $(basename ${query} .rq).fuseki.timings.collected.csv
+
+        echo virtuoso
+        ./timer.sh $query http://10.14.28.137:8890/sparql virtuoso 1
+        cat $(basename ${query} .rq).virtuoso.timings.csv | tail -1 >> $(basename ${query} .rq).virtuoso.timings.collected.csv
+
+    done
+done
+#+end_example
+
+**** Results
+     :PROPERTIES:
+     :CUSTOM_ID: results-2
+     :ID:       f0741ea0-22c7-4901-9bcc-8f801ce2e2cf
+     :END:
+A bit difficult to compare to Run 2 above (different colors, different
+facet order). But looking closely, the results from above comparing only
+ontop and fuseki more or less come out in the same way, again.
+
+[[file:queries/saved_runs/20241210T143500/facet_walltime.png]]
+
+** Dec. 11 2024
+   :PROPERTIES:
+   :CUSTOM_ID: dec.-11-2024
+   :ID:       ce48bd6d-677c-49e5-9312-0b3ba1e07f4f
+   :END:
+*** Run 4: Query response time vs. number of triples
+    :PROPERTIES:
+    :CUSTOM_ID: run-4-query-response-time-vs.-number-of-triples
+    :ID:       d69335f4-8277-4845-b675-43050b8f1ad3
+    :END:
+We first generated rdf.ttl files of reduced size with
+
+#+begin_example
+construct {?s ?p ?o} where {?s ?p ?o} limit <NTRIPLES>
+#+end_example
+
+=NTRIPLES= is a placeholder which takes on values of 1000, 2000, 5000,
+10000, 20000, 50000, 100000, and 200000.
+
+Starting with the 200k triples graph loaded into the fuseki triplestore,
+we run 10 queries on the fuseki endpoint, repeat that sequence 10 times.
+Script is pasted below.
+
+After each run, we drop the default graph
+
+#+begin_example
+drop default
+#+end_example
+
+and upload the next reduced graph.
+
+**** Script
+     :PROPERTIES:
+     :CUSTOM_ID: script-2
+     :ID:       3ac95051-05a6-4ef5-87d3-753f6991a49c
+     :END:
+#+begin_example
+#! /bin/bash
+
+for query in ??-*.rq; do
+    echo "Wall (s),User (s),Sys (s)" > $(basename ${query} .rq).fuseki.timings.collected.csv
+done
+
+for round in {1..10}; do
+    echo "round=$round "
+    for query in ??-*.rq; do
+        echo "$query "
+
+        echo fuseki
+        ./timer.sh $query http://10.14.28.137:3030/OME/sparql fuseki 1
+        cat $(basename ${query} .rq).fuseki.timings.csv | tail -1 >> $(basename ${query} .rq).fuseki.timings.collected.csv
+    done
+done
+#+end_example
+
+**** Results
+     :PROPERTIES:
+     :CUSTOM_ID: results-3
+     :ID:       669b128d-6b61-47cf-8ea1-ef02c3b5f95d
+     :END:
+[[file:queries/saved_runs/20241211T102000/fuseki_clock_vs_ntriples_linear.png]]
+[[file:queries/saved_runs/20241211T102000/fuseki_clock_vs_ntriples_log.png]]
+
+The figure shows the measured query response time (Wall , User , and
+System clocks [fn:1]) as function of the number of triples loaded in the
+Fuseki triplestore (top: linear x axis scale, right: log x axis scale).
+Each point is the average over 10 identical queries, the various queries
+are color coded. The shaded areas mark 1 standard deviation above and
+below the marker.
+
+**** Discussion
+     :PROPERTIES:
+     :CUSTOM_ID: discussion
+     :ID:       eaf91db0-c71b-4d7e-be99-8a0f5d5e7197
+     :END:
+The observed query response time vary with the number of triples and the
+type of the query. The longest query response time (wall time) is
+measured for the "image properties" query, which retrieves all key-value
+annotations from all images. For very small graphs (1000 and 2000
+triples), all measured response (wall) times coincide at approx. 1s. Up
+to a certain graph size, each query's response time is at first
+independent of the graph size before it starts to increase at
+approximately linear scale (query response wall time ~ number of
+triples).
+
+[fn:1] Wall time = time elapsed on a "wall" clock; User time = Sum of
+       times that any CPU spends in user code within the process; System
+       time: Sum of times that any CPU spends in system code within the
+       process. See
+       [[https://stackoverflow.com/questions/556405/what-do-real-user-and-sys-mean-in-the-output-of-time1][this
+       SO post for details]].

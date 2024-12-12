@@ -1,0 +1,121 @@
+* BioHackathon2024-P4
+  :PROPERTIES:
+  :CUSTOM_ID: biohackathon2024-p4
+  :ID:       bb23bb6d-da31-4478-b545-6667891e0ebb
+  :END:
+Repository for project P4 "Endpoint Drafting and Testing" at the 2024
+deNBI BioHackathon
+
+** Benchmark environment
+   :PROPERTIES:
+   :CUSTOM_ID: benchmark-environment
+   :ID:       4c8c631f-eb1c-49f6-9fd8-f128ea5b8218
+   :END:
+*** Triplestores and SPARQL endpoints
+    :PROPERTIES:
+    :CUSTOM_ID: triplestores-and-sparql-endpoints
+    :ID:       7be1238b-6086-4e5a-a2aa-7599b4fa2716
+    :END:
+All endpoints run on the 128.176.233.7 server.
+
+| Name     | Query form VPN IP                            | Endpoint (http API) VPN IP          | Query form public IP                          | Endpoint (http API) public IP        | Comments |
+|----------+----------------------------------------------+-------------------------------------+-----------------------------------------------+--------------------------------------+----------|
+| Ontop    | http://10.14.28.137:8080                     | http://10.14.28.137:8080/sparql     | http://128.176.233.7:8080                     | http://128.176.233.7:8080/sparql     |          |
+| Fuseki   | http://10.14.28.137:3030/#/dataset/OME/query | http://10.14.28.137:3030/OME/sparql | http://128.176.233.7:3030/#/dataset/OME/query | http://128.176.233.7:3030/OME/sparql |          |
+| Virtuoso | http://10.14.28.137:8890/sparql              | http://10.14.28.137:8890/sparql     | http://128.176.233.7:8890/sparql              | http://128.176.233.7:8890/sparql     |          |
+
+** SPARQL client
+   :PROPERTIES:
+   :CUSTOM_ID: sparql-client
+   :ID:       71007c0a-5f84-4a47-a8db-a868028b76b9
+   :END:
+*** Apache-Jena
+    :PROPERTIES:
+    :CUSTOM_ID: apache-jena
+    :ID:       332942fa-2632-48b1-84ba-6cf162487e8b
+    :END:
+- Download:
+  https://dlcdn.apache.org/jena/binaries/apache-jena-5.2.0.tar.gz
+- Unpack into a directory and append //dir/to/apache-jena-5.2.0/bin// to
+  $PATH (on *N*X.)
+
+** Queries
+   :PROPERTIES:
+   :CUSTOM_ID: queries
+   :ID:       20c17813-1e9e-4fad-b471-92c42ab59305
+   :END:
+Directory /queries// contains a number of SPARQL query files. They can be run on
+any of the endpoints listed above (`rsparql` must be in `$PATH`)
+
+#+begin_example
+rsparql --service http://128.176.233.7:8080/sparql --query 01-list_of_attributes.rq
+#+end_example
+
+** Timing
+   :PROPERTIES:
+   :CUSTOM_ID: timing
+   :ID:       aa2e0548-c1f9-4109-84e9-394ca2e3bd1c
+   :END:
+The script /queries/timer.sh/ runs a given query N times, measure wall
+clock, user, and system time and report the resulting statistics.
+Timings will be saved to disk. Usage (must be in the /queries//
+directory):
+
+#+begin_example
+./timer.sh QUERY ENDPOINTURL ENDPOINTNAME NQUERIES
+#+end_example
+
+***** Example
+      :PROPERTIES:
+      :CUSTOM_ID: example
+      :ID:       82ebfe3c-7c7a-49e3-8327-f0660ef72fb9
+      :END:
+#+begin_example
+cd queries
+./timer.sh 01-list_of_attributes.rq http://128.176.233.7:8080/sparql ontop 100
+#+end_example
+
+This would run the query /01-list_of_attributes.rq/ on the ontop
+endpoint and write results to /01-list_of_attributes.ontop.timings.csv/.
+
+*** Timing analysis
+    :PROPERTIES:
+    :CUSTOM_ID: timing-analysis
+    :ID:       6dc8a053-c96d-4a1b-9898-3323f998a779
+    :END:
+The notebook /queries/analyze_timings.ipynb/ loads all timing csv data,
+performs some descriptive statistics and renders a number of plots.
+Adjust to your liking. Required python packages:
+=pandas, seaborn, matplotlib=.
+
+** Mappings
+   :PROPERTIES:
+   :CUSTOM_ID: mappings
+   :ID:       e0560c4d-e4e3-49a5-96ba-7fb65c9933ba
+   :END:
+Mappings are defined in the
+[[https://github.com/German-BioImaging/omero-ontop-mappings][omero-ontop-mappings
+repo]]. The repo is cloned on the Münster server. Ontop runs inside a
+=screen= session and normally restarts after a change to the mappings,
+ontology, or config. It may become neccessary to restart ontop in case
+of syntactical errors in any of these files. To (re-)launch the ontop
+server:
+
+#+begin_example
+screen -dr ontop
+cd /home/ubuntu/repos/omero-ontop-mappings/hack24
+./run-ontop.sh
+#+end_example
+
+To leave the screen session press and hold CTRL, press and release a,
+press and release d, release CTRL. This brings you back into your login
+shell. You can then logout from the server, the screen session will
+continue in the background.
+
+** Further reading
+   :PROPERTIES:
+   :CUSTOM_ID: further-reading
+   :ID:       23647fe3-a3d6-40a3-9a6b-2a6eaf04ea6b
+   :END:
+https://medium.com/wallscope/comparing-linked-data-triplestores-ebfac8c3ad4f
+
