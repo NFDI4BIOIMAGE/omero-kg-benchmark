@@ -380,3 +380,4 @@ done
 In previous runs, we connected to the sparql endpoints via VPN, here we connect via public network. We find
 that this results in a slight reduction of query response time in all queries.
 
+[[file:queries/saved_runs/20241212T164000/facet_walltime_vpn-www.png]]
