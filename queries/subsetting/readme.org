@@ -1,0 +1,11 @@
+This directory contains graphs of defined size (indicated by filename, e.g. 1k = 1000 triples.)
+
+The query to construct these graphs is
+
+#+begin_example
+construct {?s ?p ?o} where {?s ?p ?o} limit 1000
+#+end_example
+
+To check a graph's size, run the query
+
+: select (count(?s) as ?ns) where {?s ?p ?o.}
