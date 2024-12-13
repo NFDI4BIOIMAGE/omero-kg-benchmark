@@ -303,3 +303,80 @@ triples).
        time: Sum of times that any CPU spends in system code within the
        process. See
        [[https://stackoverflow.com/questions/556405/what-do-real-user-and-sys-mean-in-the-output-of-time1][this SO post for details]].
+       
+      
+* Dec. 12 2024 
+:PROPERTIES:
+:ID:       f9a1d909-364f-4919-9116-9680342b8a1e
+:END:
+** Run 5: Query response time on public network 
+:PROPERTIES:
+:ID:       ba2d1ddf-cee3-4a85-81b0-247f0a475e18
+:END:
+*** Run parameters
+     :PROPERTIES:
+     :CUSTOM_ID: run-parameters-1
+     :ID:       a878ed7b-0235-426b-9a49-0d9fd3faca66
+     :END:
+- Servers: ontop, fuseki, virtuoso
+- number of query repeats: 10
+- client ip: 128.176.254.12
+- client hostname: micropop046
+- client software: apache-jena-5.2.0/bin/rsparql
+- rsparql version reported as 4.2.0
+- connection: public network (server IP 128.176.233.7)
+
+*** Script
+:PROPERTIES:
+:ID:       64a69025-7fb5-4843-a082-e7a8d52b03e2
+:END:
+[[file:queries/saved_runs/20241212T164000/run5.sh]]
+#+begin_example shell
+#! /bin/bash
+
+for query in ../../??-*.rq; do
+    echo "Wall (s),User (s),Sys (s)" > $(basename ${query} .rq).ontop.timings.collected.csv
+    echo "Wall (s),User (s),Sys (s)" > $(basename ${query} .rq).fuseki.timings.collected.csv
+    echo "Wall (s),User (s),Sys (s)" > $(basename ${query} .rq).virtuoso.timings.collected.csv
+done
+
+for round in {1..30}; do
+    echo ""
+    echo ""
+    echo "round=$round "
+    for query in ../../??-*.rq; do
+        echo "$query "
+
+        echo ontop
+        ../../timer.sh $query http://128.176.233.7:8080/sparql ontop 1
+        cat $(basename ${query} .rq).ontop.timings.csv | tail -1 >> $(basename ${query} .rq).ontop.timings.collected.csv
+
+        echo fuseki
+        ../../timer.sh $query http://128.176.233.7:3030/OME/sparql fuseki 1
+        cat $(basename ${query} .rq).fuseki.timings.csv | tail -1 >> $(basename ${query} .rq).fuseki.timings.collected.csv
+
+        echo virtuoso
+        ../../timer.sh $query http://128.176.233.7:8890/sparql virtuoso 1
+        cat $(basename ${query} .rq).virtuoso.timings.csv | tail -1 >> $(basename ${query} .rq).virtuoso.timings.collected.csv
+
+    done
+done
+#+end_example
+
+*** Results
+:PROPERTIES:
+:ID:       271af288-77d4-4704-a71e-f01824c3d1f0
+:END:
+[[file:queries/saved_runs/20241212T164000/facet_walltime.png]]
+
+*** Discussion
+:PROPERTIES:
+:ID:       c2ff6aab-040c-44b7-99d2-d18d748cfc84
+:END:
+**** VPN vs. Public Network
+:PROPERTIES:
+:ID:       1370328c-2316-42d3-a08b-57e47203b1bc
+:END:
+In previous runs, we connected to the sparql endpoints via VPN, here we connect via public network. We find
+that this results in a slight reduction of query response time in all queries.
+
