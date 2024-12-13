@@ -23,7 +23,10 @@
 - rsparql version reported as 4.2.0
 - connection: vpn to uni-muenster
 - note: all queries were run once about 30min before. Noting reduced
-  query time on the 00-construct and other queries. Caching?
+ query time on the 00-construct and other queries. Caching?
+- As there is no API to control cache neither server side nor client side, we may have
+  to do some kind of warm up. In subsequent runs, change order of loops (repetition of queries should be a
+  higher order loop than iterating servers.
 
 *** Workflow
 :PROPERTIES:
