@@ -140,6 +140,15 @@ Timings come out differently: for many queries, now fuseki is faster,
 ontop factor 2 slower.
 [[file:queries/saved_runs/20241210T113800/facet_walltime.png]]
 
+*** Discussion
+:PROPERTIES:
+:ID:       6e63d7ab-dbb0-4a5a-9840-40145c2077e3
+:END:
+The observed factor 2 in ontop's query response time as compared to fuseki is likely
+caused by the overhead in ontop. Ontop has to rewrite the sparql query in sql, run
+the sql query against the relational database and re-translate the sql response
+into RDF, whereas fuseki runs the sparql query directly on its triplestore database.
+
 ** Run 3: Same logic as Run 2 but including virtuoso
     :PROPERTIES:
     :CUSTOM_ID: run-3-same-logic-as-run-2-but-including-virtuoso
