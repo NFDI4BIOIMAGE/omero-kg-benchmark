@@ -1,2 +1,5 @@
 default_graph.ttl filter=lfs diff=lfs merge=lfs -text
 image_with_rdf/img_000000005_04-RFPdouble_002_trap_027.tif filter=lfs diff=lfs merge=lfs -text
+queries/saved_runs/20241211T102000/fuseki_clock_vs_ntriples_linear.pdf filter=lfs diff=lfs merge=lfs -text
+queries/saved_runs/20241211T102000/fuseki_clock_vs_ntriples_log.pdf filter=lfs diff=lfs merge=lfs -text
+queries/saved_runs/20241212T164000/facet_walltime.pdf filter=lfs diff=lfs merge=lfs -text
